@@ -16,9 +16,7 @@ class AppChannel < ApplicationCable::Channel
   
   def online
     logger.info "AppChannel online"
-    
-    # ActionCable.server.broadcast "app_channel",
-    # message: 'render_message'    
+
     OnlineService.new.perform
   end
 end
