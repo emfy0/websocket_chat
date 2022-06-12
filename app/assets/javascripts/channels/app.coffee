@@ -4,11 +4,18 @@ App.app = App.cable.subscriptions.create "AppChannel",
   disconnected: ->
 
   received: (data) ->
-    $('#online_users').html data['message']
+    updatePage data['message']
 
-  online: ->
-    @perform 'online'
+updatePage = (json) ->
+  if $('#online_users').length == 0
+    return
 
-jQuery(document).on 'turbolinks:load', ->
-  if $('#online_users').length > 0
-    App.app.online()
+  data = JSON.parse json
+
+  user_id = data['id']
+  user_page = $('#online_users').find("[data-user-id=#{user_id}]")
+
+  if user_page.length > 0 && data['online'] == false
+    user_page.remove()
+  else if user_page.length == 0 && data['online'] == true
+    $('#online_users').append("<p data-user-id=#{user_id}> #{data['nickname']}</p>")

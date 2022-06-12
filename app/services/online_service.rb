@@ -1,25 +1,19 @@
 class OnlineService
-  def initialize
-    @users = User.online
+  def initialize(user:)
+    @user = user
   end
 
   def perform
-    render_online_users
     broadcast_message
   end
 
   private
 
   def broadcast_message
-
-    ActionCable.server.broadcast "app_channel",
-      message: render_online_users
-
+    ActionCable.server.broadcast "app_channel", message: render_user
   end
 
-  def render_online_users
-    ApplicationController.renderer.render(partial: 'users/user', locals: {
-      users: @users
-    })
+  def render_user
+    ApplicationController.renderer.render json: @user, only: %i[id online nickname]
   end
 end

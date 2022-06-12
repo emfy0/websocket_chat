@@ -17,6 +17,6 @@ class AppChannel < ApplicationCable::Channel
   def online
     logger.info "AppChannel online"
 
-    OnlineService.new.perform
+    OnlineService.new(user: current_user).perform
   end
 end
