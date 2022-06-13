@@ -13,10 +13,10 @@ bundle install
 ```
 3. Run database migrations.
 ```
-rails db:create
-rails db:migrate
+bundle exec rails db:create
+bundle exec rails db:migrate
 ```
 4. Start
 ```
-rails s
+bundle exec rails s
 ```
