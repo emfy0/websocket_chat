@@ -1,24 +1,22 @@
-# README
+# Instatalk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple chat rooms using Action Cable and Redis websockets
 
-Things you may want to cover:
+## Deployment
+http://chat.emfy0.xyz/
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Launch
+1. Clone repo.
+1. Bundle
+```
+bundle install
+```
+3. Run database migrations.
+```
+rails db:create
+rails db:migrate
+```
+4. Start
+```
+rails s
+```
