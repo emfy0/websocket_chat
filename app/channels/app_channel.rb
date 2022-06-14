@@ -4,7 +4,7 @@ class AppChannel < ApplicationCable::Channel
     current_user.increment!(:connection_counter)
     logger.info("#{current_user.inspect}")
 
-    online
+    online if current_user.reload.connection_counter == 1
   end
   
   def unsubscribed
