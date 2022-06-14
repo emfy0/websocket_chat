@@ -7,15 +7,16 @@ App.app = App.cable.subscriptions.create "AppChannel",
     updatePage data['message']
 
 updatePage = (json) ->
-  if $('#online_users').length == 0
+  online_users_element = document.getElementById('online_users')
+  if !online_users_element
     return
 
   data = JSON.parse json
+  { id, nickname, online } = data
 
-  user_id = data['id']
-  user_page = $('#online_users').find("[data-user-id=#{user_id}]")
+  user = online_users_element.querySelector('[data-user-id="' + id + '"]')
 
-  if user_page.length > 0 && data['online'] == false
-    user_page.remove()
-  else if user_page.length == 0 && data['online'] == true
-    $('#online_users').append("<p data-user-id=#{user_id}> #{data['nickname']}</p>")
+  if user && !online
+    user.remove()
+  else if !user && online
+    online_users_element.innerHTML += '<p data-user-id="' + id + '">' + "#{nickname}</p>"
