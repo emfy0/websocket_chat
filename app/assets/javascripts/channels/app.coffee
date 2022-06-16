@@ -19,4 +19,4 @@ updatePage = (json) ->
   if user && !online
     user.remove()
   else if !user && online
-    online_users_element.innerHTML += '<p data-user-id="' + id + '">' + "#{nickname}</p>"
+    online_users_element.innerHTML += "<p data-user-id=\"#{id}\">#{nickname}</p>"
