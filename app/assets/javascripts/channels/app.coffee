@@ -14,7 +14,7 @@ updatePage = (json) ->
   data = JSON.parse json
   { id, nickname, online } = data
 
-  user = online_users_element.querySelector('[data-user-id="' + id + '"]')
+  user = online_users_element.querySelector("[data-user-id=\"#{id}\"]")
 
   if user && !online
     user.remove()
