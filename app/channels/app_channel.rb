@@ -1,22 +1,28 @@
 class AppChannel < ApplicationCable::Channel
   def subscribed
     stream_from "app_channel"
-    current_user.increment!(:connection_counter)
-    logger.info("#{current_user.inspect}")
-
-    online if current_user.reload.connection_counter == 1
+    unless current_user.online
+      current_user.update(online: true)
+      online
+    end
   end
   
   def unsubscribed
-    current_user.decrement!(:connection_counter)
-    logger.info("#{current_user.inspect}")
-
-    online if current_user.reload.connection_counter == 0
+    if amount_of_connections(current_user) == 0
+      current_user.update(online: false)
+      online
+    end
   end
   
   def online
     logger.info "AppChannel online"
 
     OnlineService.new(user: current_user).perform
+  end
+
+  private
+
+  def amount_of_connections(user)
+    ActionCable.server.connections.count { |con| con.current_user == user }
   end
 end

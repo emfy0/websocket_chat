@@ -14,16 +14,6 @@ class OnlineService
   end
 
   def render_user
-    ApplicationController.renderer.render json: user_json
-  end
-
-  private
-
-  def user_json
-    {
-      nickname: @user.nickname,
-      online: @user.connection_counter > 0 ? true : false,
-      id: @user.id
-    }
+    ApplicationController.renderer.render json: @user, only: %i[id online nickname]
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220614121648) do
+ActiveRecord::Schema.define(version: 20220611193036) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20220614121648) do
     t.string "nickname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "connection_counter", default: 0, null: false
+    t.boolean "online", default: false, null: false
   end
 
 end
