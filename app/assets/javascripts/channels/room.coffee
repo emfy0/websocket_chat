@@ -1,3 +1,13 @@
+scrollMessagesDown = ->
+  messages = $('#messages')
+  messages.scrollTop(messages.prop("scrollHeight"))
+
+sendMessage = (event) ->
+  message = event.target.value
+  if message
+    App.room.speak(message)
+    event.target.value = ""
+
 channel = undefined
 
 jQuery(document).on 'turbolinks:load', ->
@@ -15,16 +25,6 @@ jQuery(document).on 'turbolinks:load', ->
     if event.keyCode is 13
       event.preventDefault()
       sendMessage event
-
-scrollMessagesDown = ->
-  messages = $('#messages')
-  messages.scrollTop(messages.prop("scrollHeight"))
-
-sendMessage = (event) ->
-  message = event.target.value
-  if message
-    App.room.speak(message)
-    event.target.value = ""
 
 createRoomChannel = (roomId) ->
   App.room = App.cable.subscriptions.create { channel: "RoomChannel", roomId: roomId },
