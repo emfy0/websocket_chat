@@ -14,7 +14,7 @@ jQuery(document).on 'turbolinks:load', ->
   messages = $('#messages')
 
   if messages.length == 0
-    channel.unsubscribe()
+    channel.unsubscribe() if channel
     return
 
   channel = createRoomChannel messages.data('room-id')
