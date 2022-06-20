@@ -14,11 +14,10 @@ jQuery(document).on 'turbolinks:load', ->
   messages = $('#messages')
 
   if messages.length == 0
-    channel && channel.unsubscribe()
-    channel = undefined
+    channel.unsubscribe()
     return
 
-  channel = channel || createRoomChannel messages.data('room-id')
+  channel = createRoomChannel messages.data('room-id')
   messages.scrollTop(messages.prop("scrollHeight"))
 
   $(document).on 'keypress', '#message_body', (event) ->
