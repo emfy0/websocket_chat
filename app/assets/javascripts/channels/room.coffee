@@ -13,7 +13,7 @@ channel = undefined
 jQuery(document).on 'turbolinks:load', ->
   messages = $('#messages')
 
-  if messages.length == 0
+  if !messages.length
     channel && channel.unsubscribe()
     return
 
