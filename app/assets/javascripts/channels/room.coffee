@@ -1,10 +1,17 @@
 scrollMessagesDown = ->
   messages = $('#messages')
 
-  lastElementHeight = messages.children().last().outerHeight(true)
   scrollHeight = messages.prop("scrollHeight")
 
-  if scrollHeight - messages.scrollTop() == lastElementHeight + messages.prop("clientHeight")
+  currentUserId = $('.card-body').data('user-id')
+
+  lastMessage = messages.children().last()
+  if lastMessage.data('user-id') == currentUserId
+    messages.scrollTop scrollHeight
+    return
+
+  lastElementHeight = lastMessage.outerHeight(true)
+  if scrollHeight - messages.scrollTop() == lastElementHeight + messages.prop('clientHeight')
     messages.scrollTop scrollHeight
 
 sendMessage = (event) ->
