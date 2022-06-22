@@ -11,7 +11,7 @@ scrollMessagesDown = ->
     return
 
   lastElementHeight = lastMessage.outerHeight(true)
-  if scrollHeight - messages.scrollTop() == lastElementHeight + messages.prop('clientHeight')
+  if scrollHeight - Math.round(messages.scrollTop()) == lastElementHeight + messages.prop('clientHeight')
     messages.scrollTop scrollHeight
 
 sendMessage = (event) ->
